@@ -230,3 +230,7 @@ See the benchmark above for how it compares with the earlier models. Training de
 - [ModernBERT](https://huggingface.co/answerdotai/ModernBERT-base) by Answer.AI and LightOn.
 - [GoEmotions](https://huggingface.co/datasets/google-research-datasets/go_emotions) by Google Research.
 - 3D emoji from [Microsoft Fluent Emoji](https://github.com/microsoft/fluentui-emoji) (MIT License).
+
+## License
+
+Released under the Apache 2.0 license. <!-- Add a LICENSE file to the repo root (GitHub: Add file > Create new file > LICENSE > choose a template). -->
