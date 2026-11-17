@@ -76,14 +76,13 @@ The project started from a classic baseline and moved through recurrent and atte
   (or change the paths). Delete any row you don't use.
 -->
 
-| Home | Result |
-|---|---|
-| ![Home screen](assets/screenshots/01-home.png) | ![Prediction result](assets/screenshots/02-result.png) |
+| Home 
+|---|
+| ![Home screen](assets/screenshots/01-home.png) |
 
-| Recent history | API docs (Swagger) |
+| Result | Recent history 
 |---|---|
-| ![History](assets/screenshots/03-history.png) | ![Swagger UI](assets/screenshots/04-swagger.png) |
-
+| ![Prediction result](assets/screenshots/02-result.png) | ![History](assets/screenshots/03-history.png) | 
 ---
 
 ## Features
