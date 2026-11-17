@@ -55,26 +55,11 @@ The project started from a classic baseline and moved through recurrent and atte
 
 ## Demo
 
-<!--
-  🎬 DEMO VIDEO: put your screen recording here.
-
-  Option A (recommended): edit this README on github.com, drag your .mp4 into the editor,
-  and GitHub will insert a link that plays inline. Paste that link on its own line below.
-
-  Option B: convert the recording to a GIF (under about 10 MB), save it as assets/demo.gif,
-  and use:  ![Demo](assets/demo.gif)
--->
-
 > 🎬 **Demo video goes here.**
-
+![Demo](assets/demo.gif)
 ---
 
 ## Screenshots
-
-<!--
-  📸 Save your screenshots in assets/screenshots/ with the names below
-  (or change the paths). Delete any row you don't use.
--->
 
 | Home 
 |---|
@@ -187,19 +172,18 @@ Returns the server status, the model id, the device in use and the class labels.
 ```
 emotion-api/
 ├── app.py              # FastAPI app: model loading, text cleaning, endpoints
-├── index.html          # Web interface (served at /)
+├── index.html          # Web interface 
 ├── requirements.txt
 ├── Dockerfile
 ├── .dockerignore
 ├── .gitignore
 ├── README.md
 └── assets/
-    ├── demo.mp4 / demo.gif        # demo recording (add yours)
-    └── screenshots/               # interface screenshots (add yours)
+    ├── demo.mp4   # demo recording
+    └── screenshots/               # interface screenshots 
         ├── 01-home.png
         ├── 02-result.png
-        ├── 03-history.png
-        └── 04-swagger.png
+        └── 03-history.png
 ```
 
 ## Model details
@@ -232,4 +216,4 @@ See the benchmark above for how it compares with the earlier models. Training de
 
 ## License
 
-Released under the Apache 2.0 license. <!-- Add a LICENSE file to the repo root (GitHub: Add file > Create new file > LICENSE > choose a template). -->
+Released under the Apache 2.0 license. 
