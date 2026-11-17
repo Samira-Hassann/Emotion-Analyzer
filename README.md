@@ -52,11 +52,9 @@ The project started from a classic baseline and moved through recurrent and atte
 - The fine-tuned ModernBERT-base model is the one served by this API.
 
 ---
+## 🎬 Application Demo
 
-## Demo
-
-> 🎬 **Demo video goes here.**
-![Demo](assets/demo.gif)
+**▶️ [Watch the Local Deployment Demo](assets/demo.mp4)**
 ---
 
 ## Screenshots
