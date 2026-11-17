@@ -52,20 +52,38 @@ The project started from a classic baseline and moved through recurrent and atte
 - The fine-tuned ModernBERT-base model is the one served by this API.
 
 ---
-## 🎬 Application Demo
 
-**▶️ [Watch the Local Deployment Demo](assets/demo.mp4)**
+## Demo
+
+<!--
+  🎬 DEMO VIDEO: put your screen recording here.
+
+  Option A (recommended): edit this README on github.com, drag your .mp4 into the editor,
+  and GitHub will insert a link that plays inline. Paste that link on its own line below.
+
+  Option B: convert the recording to a GIF (under about 10 MB), save it as assets/demo.gif,
+  and use:  ![Demo](assets/demo.gif)
+-->
+
+> 🎬 **Demo video goes here.**
+
 ---
 
 ## Screenshots
 
-| Home 
-|---|
-| ![Home screen](assets/screenshots/01-home.png) |
+<!--
+  📸 Save your screenshots in assets/screenshots/ with the names below
+  (or change the paths). Delete any row you don't use.
+-->
 
-| Result | Recent history 
+| Home | Result |
 |---|---|
-| ![Prediction result](assets/screenshots/02-result.png) | ![History](assets/screenshots/03-history.png) | 
+| ![Home screen](assets/screenshots/01-home.png) | ![Prediction result](assets/screenshots/02-result.png) |
+
+| Recent history | API docs (Swagger) |
+|---|---|
+| ![History](assets/screenshots/03-history.png) | ![Swagger UI](assets/screenshots/04-swagger.png) |
+
 ---
 
 ## Features
@@ -168,20 +186,21 @@ Returns the server status, the model id, the device in use and the class labels.
 ## Project structure
 
 ```
-emotion-api/
+Emotion-Analyzer/
 ├── app.py              # FastAPI app: model loading, text cleaning, endpoints
-├── index.html          # Web interface 
+├── index.html          # Web interface (served at /)
 ├── requirements.txt
 ├── Dockerfile
 ├── .dockerignore
 ├── .gitignore
 ├── README.md
 └── assets/
-    ├── demo.mp4   # demo recording
-    └── screenshots/               # interface screenshots 
+    ├── demo.mp4 / demo.gif        # demo recording (add yours)
+    └── screenshots/               # interface screenshots (add yours)
         ├── 01-home.png
         ├── 02-result.png
-        └── 03-history.png
+        ├── 03-history.png
+        └── 04-swagger.png
 ```
 
 ## Model details
@@ -214,4 +233,4 @@ See the benchmark above for how it compares with the earlier models. Training de
 
 ## License
 
-Released under the Apache 2.0 license. 
+Released under the Apache 2.0 license. <!-- Add a LICENSE file to the repo root (GitHub: Add file > Create new file > LICENSE > choose a template). -->
