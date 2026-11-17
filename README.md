@@ -2,9 +2,54 @@
 
 An end-to-end Natural Language Processing (NLP) pipeline for classifying text comments into core emotion categories (**anger, disgust, fear, joy, sadness, surprise**) using the [GoEmotions](https://huggingface.co/datasets/google-research-datasets/go_emotions) dataset. This repository covers the complete workflow: from exploratory data analysis and traditional machine learning baselines to deep recurrent neural networks (GRU, LSTM, BiLSTM with custom label-wise attention) and state-of-the-art Transformer fine-tuning using [ModernBERT-base](https://huggingface.co/answerdotai/ModernBERT-base).
 
-The best model is deployed as a **FastAPI** service with a web interface, so you can try it on any sentence.
+The project has two parts:
+
+1. **Research** in a [public Kaggle notebook](https://www.kaggle.com/code/samoura/multi-class-emotion-classification-on-goemotion): data analysis, every model that was tried, and the final fine-tuning.
+2. **Deployment** in `app.py` and `index.html`: the best model served as a **FastAPI** API with a web interface, so you can try it on any sentence.
 
 **Model on Hugging Face:** [Samira-Hassan/modernbert-goemotions-6class](https://huggingface.co/Samira-Hassan/modernbert-goemotions-6class)
+
+---
+
+## 📓 Notebook
+
+The full research workflow lives in a single public notebook on Kaggle.
+
+[![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/code/samoura/multi-class-emotion-classification-on-goemotion)
+
+**[🎭 Multi-Class Emotion Classification on GoEmotion](https://www.kaggle.com/code/samoura/multi-class-emotion-classification-on-goemotion)**
+
+| Stage | Model | Test accuracy |
+| :--- | :--- | :---: |
+| Baseline | TF-IDF + Logistic Regression | 55.01% |
+| Recurrent networks | GRU / LSTM / BiLSTM + FastText 300d | 52.81% / 54.68% / 54.82% |
+| Custom attention | BiLSTM + Label-Wise Attention | 57.41% |
+| Transformer | ModernBERT-base fine-tuning | 58.91% |
+
+The notebook goes from exploratory data analysis and text cleaning, through each model above, to the final ModernBERT fine-tuning whose weights are served by this API.
+The FastText models use the pre-trained `crawl-300d-2M-subword` embeddings, which are attached to the Kaggle notebook as a data source.
+
+## 🏗️ Model Progression & Architecture Benchmark
+
+The project started from a classic baseline and moved through recurrent and attention-based architectures before settling on a Transformer. All models are evaluated on the test set and ranked by Macro F1.
+
+### Overall Model Ranking & Performance Metrics
+
+| Rank | Model Architecture | Type | Accuracy | Macro Precision | Macro Recall | Macro F1 | Weighted F1 |
+| :-: | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
+| 1 | 🏆 **ModernBERT-base** | Transformer | **0.5891** | **0.5758** | **0.5636** | **0.5680** | **0.5924** |
+| 2 | BiLSTM + Label-Wise Attention | Custom Attention | 0.5741 | 0.5544 | 0.5525 | 0.5527 | 0.5738 |
+| 3 | TF-IDF + Logistic Regression | Baseline | 0.5501 | 0.5266 | 0.5333 | 0.5292 | 0.5514 |
+| 4 | LSTM | RNN | 0.5468 | 0.5315 | 0.5279 | 0.5210 | 0.5449 |
+| 5 | BiLSTM | Bidirectional RNN | 0.5482 | 0.5375 | 0.5247 | 0.5204 | 0.5484 |
+| 6 | GRU | RNN | 0.5281 | 0.5083 | 0.5165 | 0.5082 | 0.5307 |
+
+**Takeaways**
+
+- **ModernBERT-base is the best model on every metric**: it improves Macro F1 by about 0.015 over the best non-Transformer model and by about 0.039 over the TF-IDF baseline.
+- **Label-wise attention made the biggest difference among the recurrent models**: it lifted the BiLSTM from 0.5204 to 0.5527 Macro F1 (and from 0.5482 to 0.5741 accuracy).
+- **The TF-IDF baseline is strong**: plain GRU, LSTM and BiLSTM models scored below it on both accuracy and Macro F1.
+- The fine-tuned ModernBERT-base model is the one served by this API.
 
 ---
 
@@ -48,30 +93,6 @@ The best model is deployed as a **FastAPI** service with a web interface, so you
 - REST API with single and batch prediction, plus interactive docs at `/docs`.
 - Text cleaning identical to the preprocessing used in training (HTML, URLs, emails, mentions, emoji).
 - Runs on CPU or GPU, and ships with a Dockerfile.
-
-## 🏗️ Model Progression & Architecture Benchmark
-
-The project started from a classic baseline and moved through recurrent and attention-based architectures before settling on a Transformer.
-
-| Model | Architecture Type | Test Accuracy | Macro F1-Score |
-| :--- | :--- | :---: | :---: |
-| **TF-IDF + Logistic Regression** | Baseline | 55.01% | 0.53 |
-| **GRU + FastText 300d** | RNN | 52.81% | 0.51 |
-| **LSTM + FastText 300d** | RNN | 54.68% | 0.52 |
-| **BiLSTM + FastText 300d** | Bidirectional RNN | 54.82% | 0.52 |
-| **BiLSTM + Label-Wise Attention** | Custom Attention | 57.41% | 0.55 |
-| 🏆 **ModernBERT-base** | **Transformer** | **Best Performing** | **Optimized** |
-
-<!--
-  ✏️ Replace "Best Performing" and "Optimized" in the last row with the real
-  ModernBERT test accuracy and macro F1, for example: **XX.XX%** and **0.XX**.
--->
-
-**Takeaways**
-
-- The TF-IDF + Logistic Regression baseline (55.01%) was hard to beat: plain GRU, LSTM and BiLSTM models with FastText embeddings did not improve on it.
-- Adding label-wise attention to the BiLSTM gave the largest gain among the non-Transformer models (about +2.6 points of accuracy over the plain BiLSTM).
-- The fine-tuned ModernBERT-base model is the best performer and is the one served by this API.
 
 ## Emotion classes
 
@@ -173,7 +194,6 @@ emotion-api/
 ├── .dockerignore
 ├── .gitignore
 ├── README.md
-├── notebooks/          # EDA, baselines, RNNs and ModernBERT fine-tuning (add yours)
 └── assets/
     ├── demo.mp4 / demo.gif        # demo recording (add yours)
     └── screenshots/               # interface screenshots (add yours)
@@ -198,6 +218,7 @@ See the benchmark above for how it compares with the earlier models. Training de
 
 ## Limitations
 
+- Overall test accuracy is about 59% on this six-class task, so treat predictions as a useful signal and not as ground truth.
 - English only. Other languages give unreliable results.
 - Only six emotions are predicted, so mixed or neutral text is still assigned to one of them.
 - The model was trained on Reddit comments, and accuracy may drop on very different text such as formal writing.
@@ -209,7 +230,3 @@ See the benchmark above for how it compares with the earlier models. Training de
 - [ModernBERT](https://huggingface.co/answerdotai/ModernBERT-base) by Answer.AI and LightOn.
 - [GoEmotions](https://huggingface.co/datasets/google-research-datasets/go_emotions) by Google Research.
 - 3D emoji from [Microsoft Fluent Emoji](https://github.com/microsoft/fluentui-emoji) (MIT License).
-
-## License
-
-Released under the Apache 2.0 license. <!-- Add a LICENSE file to the repo root (GitHub: Add file > Create new file > LICENSE > choose a template). -->
