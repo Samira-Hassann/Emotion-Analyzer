@@ -92,8 +92,8 @@ The project started from a classic baseline and moved through recurrent and atte
 ### Run locally
 
 ```bash
-git clone https://github.com/YOUR-GITHUB-USERNAME/emotion-api.git
-cd emotion-api
+git clone https://github.com/Samira-Hassann/Emotion-Analyzer.git
+cd Emotion-Analyzer
 
 python -m venv venv
 # Windows: venv\Scripts\activate    macOS/Linux: source venv/bin/activate
@@ -118,8 +118,8 @@ MODEL_ID=/path/to/model uvicorn app:app --port 8000
 ### Run with Docker
 
 ```bash
-docker build -t emotion-api .
-docker run -p 8000:8000 emotion-api
+docker build -t emotion-analyzer .
+docker run -p 8000:8000 emotion-analyzer
 ```
 
 ## API
